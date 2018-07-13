@@ -185,3 +185,13 @@ JWT_AUTH = {
 CELERY_RESULT_BACKEND = 'django-db'
 BROKER_URL = "amqp://localhost"
 
+
+EMAIL_HOST = 'smtp.gmail.com'
+# Port for sending e-mail.
+EMAIL_PORT = 587
+
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'pruebadajngo@gmail.com'
+EMAIL_HOST_PASSWORD = 'pruebadjango123'
+EMAIL_USE_TLS = True
+ADMIN_EMAIL = ['ivanspof@gmail.com']

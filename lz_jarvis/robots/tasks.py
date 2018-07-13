@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 
 import os
+from email.message import EmailMessage
+from os import path
 
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.keys import Keys
@@ -15,6 +17,7 @@ from celery.worker.request import Request
 from celery import current_app
 from celery import Task
 
+from lz_jarvis.settings import ADMIN_EMAIL
 from robots.models import TaskRun
 
 BASE_DIR = os.path.dirname(__file__)
@@ -173,14 +176,9 @@ def duck(self, **kwargs):
 
 @app.task(serializer='json', base=CustomTask, bind=True)
 def sendmail(self, data):
-    print(data)
-
-    print("returned", data)
-
-    #send_data = '[{}] {} {}'.format(data['type'], data['code'], data['body'])
-    # server = smtplib.SMTP('smtp.gmail.com', 587)
-    # server.starttls()
-    # server.login('ivanspoof@gmail.com', 'ghdqzh30db2')
-    # server.sendmail('ivanspoo@gmail.com', 'ivanspoof@gmail.com', send_data)
-    # server.quit()
-    return data
+    e = EmailMessage()
+    e.body = data
+    e.subject = "First Ten Links in Browser"
+    e.to = ADMIN_EMAIL
+    e.send()
+    return "Email Sent"
