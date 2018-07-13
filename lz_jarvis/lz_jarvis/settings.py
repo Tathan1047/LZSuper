@@ -194,4 +194,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'pruebadajngo@gmail.com'
 EMAIL_HOST_PASSWORD = 'pruebadjango123'
 EMAIL_USE_TLS = True
-ADMIN_EMAIL = ['ivanspof@gmail.com']
+ADMIN_EMAIL = ['ivanspoof@gmail.com']

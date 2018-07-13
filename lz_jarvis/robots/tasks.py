@@ -1,9 +1,9 @@
 from __future__ import absolute_import
 
 import os
-from email.message import EmailMessage
 from os import path
 
+from django.core.mail import EmailMessage
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
@@ -177,8 +177,11 @@ def duck(self, **kwargs):
 @app.task(serializer='json', base=CustomTask, bind=True)
 def sendmail(self, data):
     e = EmailMessage()
-    e.body = data
+    e.body = str(data)
     e.subject = "First Ten Links in Browser"
     e.to = ADMIN_EMAIL
     e.send()
     return "Email Sent"
+
+
+
